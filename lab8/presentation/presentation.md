@@ -1,12 +1,12 @@
 ---
 ## Front matter
 lang: ru-RU
-title: Индивидуальный проект 1 этап. Установка Kali Linux 
-subtitle: Основы информационной безопасности
+title: Лабораторная работа №8
+subtitle: Модель TCP/AQM
 author:
-  - Дикач А.О.
+  - Шуваев С. А.
 institute:
-  - Российский университет дружбы народов им. Патриса Лумумбы, Москва, Россия
+  - Российский университет дружбы народов, Москва, Россия
 
 ## i18n babel
 babel-lang: russian
@@ -24,54 +24,88 @@ header-includes:
  - '\makeatletter'
  - '\beamer@ignorenonframefalse'
  - '\makeatother'
-
-## Fonts
-mainfont: Arial
-romanfont: Arial
-sansfont: Arial
-monofont: Arial
 ---
 
+# Информация
 
 ## Докладчик
 
+:::::::::::::: {.columns align=center}
+::: {.column width="60%"}
 
-  * Дикач Анна Олеговна
-  * НПИбд-01-22
+  * Шуваев Сергей Александрович
+  * студент
   * Российский университет дружбы народов
-  * [1132222009@pfur.ru]
-  * <https://github.com/ANNdamn/inf_bez_project>
-  
-# Вводная часть
+  * [1032224269@pfur.ru](mailto:1032224269@pfur.ru)
+  * <https://Grinders060050.github.io/ru/>
 
-## Цели и задачи
+:::
+::: {.column width="25%"}
 
-Установить дистрибутив Kali Linux в виртуальную машину
+![](./image/0.jpg)
 
-# Выполнение этапа проекта
+:::
+::::::::::::::
 
-## Захожу на сайт https://www.kali.org/ и скачиваю образ Kali для VirtualBox  
+## Цель работы
 
-![Сайт](image/pic1.png){#fig:001 width=70%}
+Реализовать модель TCP/AQM в xcos и OpenModelica.
 
-## Создаю виртуальную машину 
+## Задание
 
-![Создание машины](image/pic2.png){#fig:002 width=50%}
+1. Построить модель TCP/AQM в xcos;
+2. Построить графики динамики изменения размера TCP окна $W(t)$ и размера очереди $Q(t)$;
+3. Построить модель TCP/AQM в OpenModelica;
 
-## Настраиваю Kali в соответствии с инструкцией на сайте
+## Реализация в xcos
 
-![Настройка](image/pic3.png){#fig:003 width=70%}
+![Установка контекста](image/1.png){#fig:001 width=70%}
 
-## Запускаю созданную виртуальную машину
+## Реализация в xcos
 
-![Запуск машины](image/pic4.png){#fig:004 width=50%}
+![Модель TCP/AQM в xcos](image/2.png){#fig:002 width=70%}
 
-## Устанавливаю пользователя root aodikach, а также пароль как в дк 
+## Реализация в xcos
 
-![Главный экран](image/pic5.png){#fig:005 width=50%}
+![Динамика изменения размера TCP окна W (t) и размера очереди Q(t)](image/3.png){#fig:003 width=70%}
 
+## Реализация в xcos
 
-## Вывод
+![Фазовый портрет (W, Q)](image/4.png){#fig:004 width=70%}
 
-Установила Kali Linux.
+## Реализация в xcos
 
+![Динамика изменения размера TCP окна W (t) и размера очереди Q(t) при С = 0.9](image/5.png){#fig:005 width=70%}
+
+## Реализация в xcos
+
+![Фазовый портрет (W, Q) при С = 0.9](image/6.png){#fig:006 width=70%}
+
+## Реализация модели в OpenModelica
+
+```
+parameter Real N=1;
+parameter Real R=1;
+parameter Real K=5.3;
+parameter Real C=1;
+
+Real W(start=0.1);
+Real Q(start=1);
+
+equation
+
+der(W)= 1/R - W*delay(W, R)/(2*R)*K*delay(Q, R);
+der(Q)= if (Q==0) then max(N*W/R-C,0) else (N*W/R-C);
+```
+
+## Реализация модели в OpenModelica
+
+![Динамика изменения размера TCP окна W (t) и размера очереди Q(t). OpenModelica](image/7.png){#fig:007 width=70%}
+
+## Реализация модели в OpenModelica
+
+![Фазовый портрет (W, Q). OpenModelica](image/8.png){#fig:008 width=70%}
+
+## Выводы
+
+В процессе выполнения данной лабораторной работы я реализовал модель TCP/AQM в xcos и OpenModelica.

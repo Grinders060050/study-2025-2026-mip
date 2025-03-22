@@ -1,8 +1,8 @@
 ---
 ## Front matter
-title: "Отчёт по первому этапу проекта"
-subtitle: "Дисциплина: Основы компьютерной безопасности"
-author: "Дикач Анна Олеговна"
+title: "Лабораторная работа 8"
+subtitle: "Модель TCP/AQM"
+author: "Шуваев Сергей Александрович"
 
 ## Generic otions
 lang: ru-RU
@@ -16,7 +16,7 @@ csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
 toc: true # Table of contents
 toc-depth: 2
 lof: true # List of figures
-lot: true # List of tables
+lot: false # List of tables
 fontsize: 12pt
 linestretch: 1.5
 papersize: a4
@@ -24,16 +24,19 @@ documentclass: scrreprt
 ## I18n polyglossia
 polyglossia-lang:
   name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
 polyglossia-otherlangs:
   name: english
 ## I18n babel
 babel-lang: russian
 babel-otherlangs: english
 ## Fonts
-mainfont: Arial
-romanfont: Arial
-sansfont: Arial
-monofont: Arial
+mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
 mainfontoptions: Ligatures=TeX
 romanfontoptions: Ligatures=TeX
 sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
@@ -65,31 +68,64 @@ header-includes:
 
 # Цель работы
 
-Установить дистрибутив Kali Linux в виртуальную машину
+Реализовать модель TCP/AQM в xcos и OpenModelica.
 
-# Выполнение этапа проекта
+# Задание
 
-1. Захожу на сайт https://www.kali.org/ и скачиваю образ Kali для VirtualBox  (рис. [-@fig:001])
+1. Построить модель TCP/AQM в xcos;
+2. Построить графики динамики изменения размера TCP окна $W(t)$ и размера очереди $Q(t)$;
+3. Построить модель TCP/AQM в OpenModelica;
 
-![Сайт](image/pic1.png){ #fig:001 width=70% }
+# Выполнение лабораторной работы
 
-2. Создаю виртуальную машину (рис. [-@fig:002]) 
+## Реализация в xcos
 
-![Создание машины](image/pic2.png){ #fig:002 width=70% }
+Построим схему xcos, моделирующую нашу систему, с начальными значениями параметров $N = 1, R = 1, K = 5.3, C = 1, W(0) = 0.1, Q(0) = 1$.
+Для этого сначала зададим переменные окружения (рис. [-@fig:001]).
 
-3. Настраиваю Kali в соответствии с инструкцией на сайте (рис. [-@fig:003])
+![Установка контекста](image/1.png){#fig:001 width=70%}
 
-![Настройка](image/pic3.png){ #fig:003 width=70% }
+Затем реализуем модель TCP/AQM, разместив блоки интегрирования, суммирования, произведения, констант, а также регистрирующие устройства (рис. [-@fig:002]):
 
-4. Запускаю созданную виртуальную машину(рис. [-@fig:004])
+![Модель TCP/AQM в xcos](image/2.png){#fig:002 width=70%}
 
-![Запуск машины](image/pic4.png){ #fig:004 width=70% }
+В результате получим динамику изменения размера TCP окна W(t) (зеленая линия) и размера очереди Q(t) (черная линия), а также фазовый портрет, который показывает наличие автоколебаний параметров системы — фазовая траектория осциллирует вокруг своей стационарной точки (рис. [-@fig:003], [-@fig:004]):
 
-5. Устанавливаю пользователя root aodikach, а также пароль как в дк (рис. [-@fig:005])
+![Динамика изменения размера TCP окна W (t) и размера очереди Q(t)](image/3.png){#fig:003 width=70%}
 
-![Главный экран](image/pic5.png){ #fig:005 width=70% }
+![Фазовый портрет (W, Q)](image/4.png){#fig:004 width=70%}
 
+Уменьшив скорость обработки пакетов $C$ до $0.9$ увидим, что автоколебания стали более выраженными (рис. [-@fig:005], [-@fig:006]).
+
+![Динамика изменения размера TCP окна W (t) и размера очереди Q(t) при С = 0.9](image/5.png){#fig:005 width=70%}
+
+![Фазовый портрет (W, Q) при С = 0.9](image/6.png){#fig:006 width=70%}
+
+## Реализация модели в OpenModelica
+
+Перейдем к реализации модели в OpenModelica. Зададим параметры, начальные значения и систему уравнений.
+
+```
+parameter Real N=1;
+parameter Real R=1;
+parameter Real K=5.3;
+parameter Real C=1;
+
+Real W(start=0.1);
+Real Q(start=1);
+
+equation
+
+der(W)= 1/R - W*delay(W, R)/(2*R)*K*delay(Q, R);
+der(Q)= if (Q==0) then max(N*W/R-C,0) else (N*W/R-C);
+```
+
+Выполнив симуляцию, получим динамику изменения размера TCP окна W(t)(зеленая линия) и размера очереди Q(t)(черная линия), а также фазовый портрет, который показывает наличие автоколебаний параметров системы — фазовая траектория осциллирует вокруг своей стационарной точки (рис. [-@fig:007], [-@fig:008]).
+
+![Динамика изменения размера TCP окна W (t) и размера очереди Q(t). OpenModelica](image/7.png){#fig:007 width=70%}
+
+![Фазовый портрет (W, Q). OpenModelica](image/8.png){#fig:008 width=70%}
 
 # Выводы
 
-Установила Kali Linux.
+В процессе выполнения данной лабораторной работы я реализовал модель TCP/AQM в xcos и OpenModelica.
