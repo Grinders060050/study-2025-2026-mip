@@ -1,0 +1,96 @@
+CPN Tools state space report for:
+/cygdrive/C/Users/Shuvayev Sergey/Desktop/10.cpn
+Report generated: Mon Mar 31 16:27:59 2025
+
+
+ Statistics
+------------------------------------------------------------------------
+
+  State Space
+     Nodes:  11
+     Arcs:   30
+     Secs:   0
+     Status: Full
+
+  Scc Graph
+     Nodes:  1
+     Arcs:   0
+     Secs:   0
+
+
+ Boundedness Properties
+------------------------------------------------------------------------
+
+  Best Integer Bounds
+                             Upper      Lower
+     Philosopher'philosopher_eats 1
+                             2          0
+     Philosopher'philosopher_thinks 1
+                             5          3
+     Philosopher'sicks_on_the_table 1
+                             5          1
+
+  Best Upper Multi-set Bounds
+     Philosopher'philosopher_eats 1
+                         1`ph(1)++
+1`ph(2)++
+1`ph(3)++
+1`ph(4)++
+1`ph(5)
+     Philosopher'philosopher_thinks 1
+                         1`ph(1)++
+1`ph(2)++
+1`ph(3)++
+1`ph(4)++
+1`ph(5)
+     Philosopher'sicks_on_the_table 1
+                         1`st(1)++
+1`st(2)++
+1`st(3)++
+1`st(4)++
+1`st(5)
+
+  Best Lower Multi-set Bounds
+     Philosopher'philosopher_eats 1
+                         empty
+     Philosopher'philosopher_thinks 1
+                         empty
+     Philosopher'sicks_on_the_table 1
+                         empty
+
+
+ Home Properties
+------------------------------------------------------------------------
+
+  Home Markings
+     All
+
+
+ Liveness Properties
+------------------------------------------------------------------------
+
+  Dead Markings
+     None
+
+  Dead Transition Instances
+     None
+
+  Live Transition Instances
+     All
+
+
+ Fairness Properties
+------------------------------------------------------------------------
+
+  Impartial Transition Instances
+     Philosopher'put_sticks 1
+     Philosopher'take_sticks 1
+
+  Fair Transition Instances
+     None
+
+  Just Transition Instances
+     None
+
+  Transition Instances with No Fairness
+     None
