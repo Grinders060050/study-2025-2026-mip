@@ -1,0 +1,138 @@
+CPN Tools state space report for:
+/cygdrive/C/Users/Shuvayev Sergey/Desktop/12.cpn
+Report generated: Thu Apr 17 20:33:03 2025
+
+
+ Statistics
+------------------------------------------------------------------------
+
+  State Space
+     Nodes:  40272
+     Arcs:   687943
+     Secs:   300
+     Status: Partial
+
+  Scc Graph
+     Nodes:  21187
+     Arcs:   580453
+     Secs:   6
+
+
+ Boundedness Properties
+------------------------------------------------------------------------
+
+  Best Integer Bounds
+                             Upper      Lower
+     main'A 1                23         0
+     main'B 1                11         0
+     main'C 1                7          0
+     main'D 1                5          0
+     main'NextRec 1          1          1
+     main'NextSend 1         1          1
+     main'Receiver 1         1          1
+     main'SA 1               1          1
+     main'SP 1               1          1
+     main'Send 1             8          8
+
+  Best Upper Multi-set Bounds
+     main'A 1            23`(1,"Modellin")++
+17`(2,"g and An")++
+12`(3,"alysis b")++
+7`(4,"y Means ")++
+2`(5,"of Colou")
+     main'B 1            11`(1,"Modellin")++
+8`(2,"g and An")++
+6`(3,"alysis b")++
+3`(4,"y Means ")++
+1`(5,"of Colou")
+     main'C 1            7`2++
+6`3++
+4`4++
+2`5
+     main'D 1            5`2++
+4`3++
+3`4++
+1`5
+     main'NextRec 1      1`1++
+1`2++
+1`3++
+1`4++
+1`5
+     main'NextSend 1     1`1++
+1`2++
+1`3++
+1`4++
+1`5
+     main'Receiver 1     1`""++
+1`"Modellin"++
+1`"Modelling and An"++
+1`"Modelling and Analysis b"++
+1`"Modelling and Analysis by Means "
+     main'SA 1           1`8
+     main'SP 1           1`8
+     main'Send 1         1`(1,"Modellin")++
+1`(2,"g and An")++
+1`(3,"alysis b")++
+1`(4,"y Means ")++
+1`(5,"of Colou")++
+1`(6,"red Petr")++
+1`(7,"y Nets##")++
+1`(8,"########")
+
+  Best Lower Multi-set Bounds
+     main'A 1            empty
+     main'B 1            empty
+     main'C 1            empty
+     main'D 1            empty
+     main'NextRec 1      empty
+     main'NextSend 1     empty
+     main'Receiver 1     empty
+     main'SA 1           1`8
+     main'SP 1           1`8
+     main'Send 1         1`(1,"Modellin")++
+1`(2,"g and An")++
+1`(3,"alysis b")++
+1`(4,"y Means ")++
+1`(5,"of Colou")++
+1`(6,"red Petr")++
+1`(7,"y Nets##")++
+1`(8,"########")
+
+
+ Home Properties
+------------------------------------------------------------------------
+
+  Home Markings
+     None
+
+
+ Liveness Properties
+------------------------------------------------------------------------
+
+  Dead Markings
+     14292 [40272,40271,40270,40269,40268,...]
+
+  Dead Transition Instances
+     None
+
+  Live Transition Instances
+     None
+
+
+ Fairness Properties
+------------------------------------------------------------------------
+
+  Impartial Transition Instances
+     main'Send_Packet 1
+     main'Transmit_Packet 1
+
+  Fair Transition Instances
+     None
+
+  Just Transition Instances
+     None
+
+  Transition Instances with No Fairness
+     main'Raceived_Packet 1
+     main'Send_ACK 1
+     main'Transmit_ASC 1

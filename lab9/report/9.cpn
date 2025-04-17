@@ -53,11 +53,11 @@
           <id>y</id>
           <layout>var y:FOOD;</layout>
         </var>
-        <ml id="ID1412338166">val stud_init = 3&apos; student;
-          <layout>val stud_init = 3&apos; student;</layout>
+        <ml id="ID1412338166">val stud_init = 3` student;
+          <layout>val stud_init = 3` student;</layout>
         </ml>
-        <ml id="ID1412339709">val food_init = 5&apos; pasty;
-          <layout>val food_init = 5&apos; pasty;</layout>
+        <ml id="ID1412339709">val food_init = 5` pasty;
+          <layout>val food_init = 5` pasty;</layout>
         </ml>
       </block>
     </globbox>
@@ -230,7 +230,7 @@ student</text>
                   filled="false"/>
         <lineattr colour="Black"
                   thick="1"
-                  type="Solid"/>
+                  type="solid"/>
         <textattr colour="Black"
                   bold="false"/>
         <text>eat</text>
@@ -641,8 +641,8 @@ student</text>
     </options>
     <binders>
       <cpnbinder id="ID2222"
-                 x="257"
-                 y="122"
+                 x="411"
+                 y="138"
                  width="600"
                  height="400">
         <sheets>
@@ -727,9 +727,7 @@ student</text>
           <IndexNode expanded="false"/>
         </IndexNode>
       </IndexNode>
-      <IndexNode expanded="false">
-        <IndexNode expanded="false"/>
-      </IndexNode>
+      <IndexNode expanded="false"/>
       <IndexNode expanded="true">
         <IndexNode expanded="false">
           <IndexNode expanded="true"/>
